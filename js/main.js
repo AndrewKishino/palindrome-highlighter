@@ -12,7 +12,6 @@ var showPalindromes = function() {
       wordArray = document.getElementById('pre-text').value.replace(/\n/g, '<br/>').split(' ');
     }
 
-    console.log(wordArray);
 
     wordArray.map(function(word){
       var newline = word.match(/(<br\/>)+/);
@@ -23,17 +22,12 @@ var showPalindromes = function() {
       else if(newline) {
         var placeholder = newline[0];
         var wordSplit = newline.input.replace(placeholder, '');
-        console.log('newline.input: ', newline.input);
-        console.log('wordSplit: ', wordSplit);
         if(wordSplit.match(/[.!?,;:]+/)) {
           var splitChar = wordSplit.match(/[.!?,;:]+/)[0];
           word = wordSplit.split(splitChar);
-          console.log('word: ', word);
           word.splice(1, 0, splitChar, placeholder);
-          console.log('word: ', word);
         } else {
           word = newline.input.split(/(<br\/>)/);
-          console.log(word);
         }
       }
 
@@ -53,7 +47,7 @@ var showPalindromes = function() {
             result.push(word + punctuation);
           }
         } else {
-          if(word === word.split('').reverse().join('') && word.length > 1) {
+          if(word.toLowerCase() === word.split('').reverse().join('').toLowerCase() && word.length > 1) {
             result.push('<span class="highlighted">' + word + '</span>');
           } else {
             result.push(word);
@@ -61,7 +55,6 @@ var showPalindromes = function() {
         }
       }
     });
-    console.log(result);
     document.getElementById('paragraph-result').innerHTML = result.join(' ');
   };
 
