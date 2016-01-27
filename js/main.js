@@ -1,5 +1,6 @@
 var showPalindromes = function() {
   var result = [];
+  var temp = '';
   document.getElementById('paragraph-result').innerHTML = '';
 
   var highlightPalindromes = function(input) {
@@ -11,6 +12,8 @@ var showPalindromes = function() {
       wordArray = document.getElementById('pre-text').value.replace(/\n/g, '<br/>').split(' ');
     }
 
+    console.log(wordArray);
+
     wordArray.map(function(word){
       var newline = word.match(/(<br\/>)+/);
 
@@ -20,13 +23,17 @@ var showPalindromes = function() {
       else if(newline) {
         var placeholder = newline[0];
         var wordSplit = newline.input.replace(placeholder, '');
-
+        console.log('newline.input: ', newline.input);
+        console.log('wordSplit: ', wordSplit);
         if(wordSplit.match(/[.!?,;:]+/)) {
           var splitChar = wordSplit.match(/[.!?,;:]+/)[0];
           word = wordSplit.split(splitChar);
+          console.log('word: ', word);
           word.splice(1, 0, splitChar, placeholder);
+          console.log('word: ', word);
         } else {
-          word = wordSplit;
+          word = newline.input.split(/(<br\/>)/);
+          console.log(word);
         }
       }
 
@@ -34,7 +41,7 @@ var showPalindromes = function() {
         highlightPalindromes(word);
       } else {
         var punctuation = word.match(/[.!?,;:]$/);
-        
+
         if(word.match(/^[.!?,;:]+$/)) {
           result[result.length-1] = result[result.length-1] + word.match(/[.!?,;:]+/)[0];
         }
