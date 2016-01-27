@@ -55,6 +55,7 @@ var showPalindromes = function() {
         }
       }
     });
+
     document.getElementById('paragraph-result').innerHTML = result.join(' ');
   };
 
